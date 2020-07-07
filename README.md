@@ -1,7 +1,7 @@
 # Juan's-OTP-Encryption-Suite
 Encryption software suite using Blum Blum Shub (BBS) pseudo-random number generator 
 
-This is software is an encryption program which can be use to encrypt any kind of file. It uses a custom implementation of Blum Blum Shub (B.B.S.) pseudo-random number generator.
+This software is an encryption program which can be use to encrypt any kind of file. It uses a custom implementation of Blum Blum Shub (B.B.S.) pseudo-random number generator.
 BBS was proposed in 1986 by Lenore Blum, Manuel Blum and Michael Shub in a paper called *A Simple Unpredictable Pseudo-Random Number Generator*
 
 BBS is a cryptographically secure pseudo-random number generator
