@@ -35,7 +35,7 @@ Once you have those 3 numbers, you can run the executable and input those number
 
 That set of numbers (*P, Q, Seed*) **is your encryption and decryption key.**
 
-Please see [this research paper](docs/"ResearchPaper.pdf") on which this software is based on for a more in-depth description of how the math behind the encryption method used in this software works. 
+Please see [this research paper](docs/ResearchPaper.pdf) on which this software is based on for a more in-depth description of how the math behind the encryption method used in this software works. 
 
 The program will automatically check your key to make sure it meets the minimum requirements.
 
@@ -45,7 +45,7 @@ The program will automatically check your key to make sure it meets the minimum 
 
 ## How secure is the encryption?
 
-Reading [this research paper](docs/"ResearchPaper.pdf") on which this software is based is *highly encouraged*. Simply put, the encryption mechanism used in this software is effectively a *one-time pad* (OTP) which requires the use of a one-time pre-shared key the same size as, or longer than, the message being sent. In this technique, a plaintext is paired with a random secret key (also referred to as a one-time pad). Then, each bit of the plaintext is encrypted by combining it with the corresponding bit from the pad using modular addition.
+Reading [this research paper](docs/ResearchPaper.pdf) on which this software is based is *highly encouraged*. Simply put, the encryption mechanism used in this software is effectively a *one-time pad* (OTP) which requires the use of a one-time pre-shared key the same size as, or longer than, the message being sent. In this technique, a plaintext is paired with a random secret key (also referred to as a one-time pad). Then, each bit of the plaintext is encrypted by combining it with the corresponding bit from the pad using modular addition.
 
 The strength of this encryption technique heavily depends on the quality of the OTP generated. This software generates an OTP using the BBS pseudo-random number generator which is cryptographically secure. Optimally, a OTP should be generated using physical methods, rather than software, however, this software aims to be practical and portable, which is why we have opted to use a software-based method to generate random bits.
 
@@ -71,7 +71,7 @@ Areas we haven't looked at:
 - Sanity check on the OTP (*i.e. is the OTP large enough for the file to be encrypted?*)
 
 ## Recommendations for choosing P & Q
-Snippet from [this research paper](docs/"ResearchPaper.pdf")
+Snippet from [this research paper](docs/ResearchPaper.pdf)
 
 ![Screenshot 1](docs/img/screenshot_2.PNG)
 
