@@ -7,8 +7,9 @@ BBS was proposed in 1986 by Lenore Blum, Manuel Blum and Michael Shub in a paper
 BBS is a cryptographically secure pseudo-random number generator
 
 ## How to Compile
+You can use the built included make file
 ```
-g++ -O3 main.cpp OTPI.cpp bbs.cpp -std=c++1z -o encryptor -lgmp
+make
 ```
 
 ## Requirements
