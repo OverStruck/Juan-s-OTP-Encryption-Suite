@@ -10,7 +10,9 @@
 class OTPI
 {
 private:
+	//read 16 bytes at the time
 	const int BLOCK_SIZE = 16;
+	//C++ Implementation of the Blum-Blum-Shub (BBS) Psudo Random Number Generator
 	BBS PRNG;
 
 public:

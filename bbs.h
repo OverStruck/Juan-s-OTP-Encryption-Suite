@@ -17,7 +17,6 @@ private:
 public:
 	BBS();
 	~BBS();
-	BBS(long p, long q, long seed);
 	BBS(const char* p, const char* q, const char* seed);
 
 	char* getGenBits();
@@ -31,10 +30,6 @@ public:
 	void getNextRand_MT(mpz_t &nextBit);
 	void getNextRand(mpz_t &randNum, mpz_t &index);
 
-	void setParams(long p, long q, long seed);
 	void setParams(const char* p, const char* q, const char* seed);
-
-	void setP(const long p);
-	void setQ(const long q);
-	void setSeed(const long seed);
+	
 };

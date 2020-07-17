@@ -4,7 +4,7 @@
 #include "OTPI.h"
 #include <chrono>
 
-//g++ -O3 main.cpp OTPI.cpp bbs.cpp print_uint128_t.cpp -std=c++1z -o encryptor -lgmp
+//g++ -O3 main.cpp OTPI.cpp bbs.cpp -std=c++1z -o encryptor -lgmp
 
 using namespace std;
 
@@ -22,6 +22,23 @@ string isPrime(mpz_t& number)
     if (result == 1) answer = "Probably yes";
     if (result == 2) answer = "Definitely yes";
     return answer;
+}
+
+void carmichaelFunc(const string p, const string q)
+{
+	mpz_t gmpP, gmpQ, carmichaelN;
+    mpz_inits(gmpP, gmpQ, carmichaelN, NULL);
+	mpz_set_str(gmpP, p.c_str(), 10);
+    mpz_set_str(gmpQ, q.c_str(), 10);
+
+    mpz_sub_ui(gmpP, gmpP, 1);
+    mpz_sub_ui(gmpQ, gmpQ, 1);
+    mpz_lcm(carmichaelN, gmpP, gmpQ);
+	gmp_printf("carmichaelN: %Zd\n", carmichaelN);
+
+	cout << "Can safely generate: " << 0 << " bits" << endl;
+
+    mpz_clears(gmpP, gmpQ, carmichaelN, NULL);
 }
 
 /*
@@ -87,6 +104,8 @@ bool checkParams(const string p, const string q, const string seed)
     printf("P mod 4 is: %lu\n",  pMod4);
     printf("Q mod 4 is: %lu\n",  qMod4);
 
+	carmichaelFunc(p, q);
+
 	printf("Max (long long) in system: %lld\n", LLONG_MAX);
     printf("Max (unsgined long long) in system: %llu\n", ULLONG_MAX);
 
@@ -131,10 +150,16 @@ bool checkParams(const string p, const string q, const string seed)
 		result = false;
 	}
 
-	//make sure seed > 1 && seed < N-1
-	if (mpz_cmp_si(gmpSeed, 2) < 0 || mpz_cmp(gmpSeed, gmpNminus1) > 0)
+	if (pSize != qSize)
 	{
-		printf("* The Seed number is not greater than 1 or less than N-1\n");
+		printf("* The length of P & Q is not the same! |P| = |Q| is required\n");
+		result = false;
+	}
+
+	//check if P == Q
+	if (mpz_cmp(gmpP, gmpQ) == 0)
+	{
+		printf("* P & Q CANNOT be the same blum prime number\n");
 		result = false;
 	}
 
@@ -156,6 +181,13 @@ bool checkParams(const string p, const string q, const string seed)
 	return result;
 }
 
+/*
+	Encrypt file
+	@param const string p - Blum Prime Number P
+	@param const string q - Blum Prime Number Q
+	@param const string seed - seed to use
+*/
+
 void encryptFile(const string p, const string q, const string seed)
 {
 	string inputFileName, outputFileName;
@@ -165,9 +197,17 @@ void encryptFile(const string p, const string q, const string seed)
 	cin >> outputFileName;
 
 	const string key[3] = {p, q, seed};
+	//initiate encryptor object with user key
 	OTPI encryptor(key);
 	encryptor.encryptFile(inputFileName, outputFileName);
 }
+
+/*
+	Decrypt file
+	@param const string p - Blum Prime Number P
+	@param const string q - Blum Prime Number Q
+	@param const string seed - seed to use
+*/
 
 void decryptFile(const string p, const string q, const string seed)
 {
